@@ -56,35 +56,51 @@ if(!todos  || todos.length <1){
 
 const saveTodo = () => {
     const itemEl = document.getElementById('item');
+    const messageEl = document.getElementById('message');
+    const itemListElement = document.getElementById('item-list');
+
 
 const todo = {
     id:randomID(),
  name : itemEl.value,
     isDone: false
 }
+if(todo.name.length < 1){
+   messageEl.innerText = "Input cannot be empty, please type in something"
+   return; 
+}
 
    const item = todoApp.create(todo);
+   
    console.log(item)
 }
 
 const displayTodos = () => {
 const todos = loadTodos();
 const itemListElement = document.getElementById('item-list');
-console.log(itemListElement);
 const todoItem = todos.map((item)=>{
     return(
         `<div class="todo-item">
-<div class="item-name">${item.name}</div>
-<div><a href="#" class="complete-todo"><i class="far fa-check-circle"></i></a>
-<a href="#" class="edit-todo"><i class="far fa-edit"></i></a>
-<a href="#" class="delete-todo"><i class="far fa-times-circle"></i></a>
+<div class="item-name" key=${item.id}>${item.name}</div>
+<div><a href="#" class="complete-todo" onclick="completeTodo(${item.id})"><i class="fa fa-check-circle"></i></a>
+<a href="#" class="edit-todo" ><i class="fa fa-edit"></i></a>
+<a href="#" class="delete-todo" onclick="deleteTodo(${item.id})"><i class="fa fa-times-circle"></i></a>
 </div>
 </div>`
     )
 })
 
-itemListElement.innerHTML = todoItem;
+itemListElement.innerHTML = todoItem.join('\n');
 
+}
+
+const completeTodo = (id) =>{
+  todoApp.tick(id);  
+}
+
+const deleteTodo = (id) => {
+    console.log(id);
+    todoApp.delete(id);
 }
 
 const randomID = function() {

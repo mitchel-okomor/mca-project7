@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+
+body{
+    margin: auto;
+    text-align: center;
+}
+
+.container{
+    margin-top: 2rem;
+   margin-left: 20%;
+   margin-right: 20%;
+}
+
+h2{
+    color: rgb(61, 60, 60);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+input{
+    width: 80%;
+    height: 2rem;
+    border-radius: 3px;
+    padding-left: 0.4rem;
+    border: 1px solid #90e8bc;
+
+}
+button{
+    padding: 0.4rem;
+    border-radius: 3px;
+    border: 1px solid #90e8bc;
+    color: #86ccac;
+    background-color: rgb(245, 247, 248);
+    outline: none;
+}
+
+button:hover{
+    background-color: #90e8bc;
+    color: rgb(61, 60, 60);
+    cursor: pointer;
+}
+
+
+
+.todo-item{
+margin-left: 0.3rem;
+margin-right: 0.3rem;
+display: flex;
+justify-content: space-between;
+
+}
+
+#item-list{
+  margin: auto;
+  text-align: center;
+  margin-top: 2rem;
+width:  93%;
+}
+
+.complete-todo{
+    color: #86ccac;
+
+}
+
+.edit-todo{
+    color: blue;
+}
+
+.delete-todo{
+    color: red;
+}
+#message{
+    color: red;
+    margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 860px){
+
+    .container{
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+}
+
+@media screen and (max-width: 480px){
+    input{
+        width: 60%;
+    }
+}
