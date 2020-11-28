@@ -74,6 +74,10 @@ width:  93%;
     color: #86ccac;
 }
 
+.fa{
+    padding-left: 0.3rem;
+}
+
 .delete-todo{
     color: red;
 }

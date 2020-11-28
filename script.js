@@ -28,7 +28,7 @@ const todoApp = {
     tick: function (id) {
         const todos = loadTodos();
         const todo = todos.find(item => item.id === id);
-        todo.isDone === false ? todo.isDone = true : todo.isDone = false;
+        todo.isDone === true ? todo.isDone = false : todo.isDone = true;
 localStorage.setItem("todos",JSON.stringify(todos) );   
         displayTodos();
     },
@@ -61,7 +61,6 @@ if(!todos  || todos.length <1){
 
 
 const saveTodo = () => {
-   
 const todo = {
     id:randomID(),
  name : itemInput.value,
@@ -90,7 +89,7 @@ const todos = loadTodos();
 const todoItem = todos.map((item)=>{
 let visibility = '';
 let strikeText = ''
-if(!item.isDone){
+if(item.isDone){
     visibility = "visibility",
     strikeText = "strike"
 }
@@ -117,6 +116,7 @@ itemListElement.innerHTML = todoItem.join('\n');
 }
 
 const completeTodo = (id) =>{
+  
   todoApp.tick(id);  
 }
 
@@ -148,6 +148,20 @@ const randomID = function() {
     }
     return id;
   }
+
+  function saveInitialData() {
+    const data =[
+        {id: "TD01C4DF4B4", name: "Pray", isDone: false}, 
+        {id: "TD06902BE9F", name: "Clean", isDone: false}, 
+        {id: "TD069045E9F", name: "Do Laundry", isDone: false}, 
+        {id: "TD06978BE9F", name: "Cook", isDone: false},
+        {id: "TD06902B69F", name: "Eat", isDone: false},
+        {id: "TD07902BE9F", name: "Code", isDone: false}
+    ];
+localStorage.setItem('todos', JSON.stringify(data));
+const todos = JSON.parse(localStorage.getItem('todos'));
+  }
+  saveInitialData();
 
   displayTodos();
 
