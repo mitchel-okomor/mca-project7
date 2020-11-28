@@ -70,6 +70,9 @@ width:  93%;
 .edit-todo{
     color: blue;
 }
+.fa-check-circle{
+    color: #86ccac;
+}
 
 .delete-todo{
     color: red;
@@ -85,6 +88,10 @@ opacity: 0.5;
 
 .strike{
     text-decoration: line-through;
+}
+
+.hide{
+    display: none;
 }
 
 @media screen and (max-width: 860px){

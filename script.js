@@ -96,12 +96,20 @@ if(!item.isDone){
 }
     return(
         `<div class="todo-item">
-<div class="item-name ${strikeText} ${visibility}" key="${item.id}">${item.name}</div>
+<div class="item-name ${strikeText} ${visibility}" >${item.name}</div>
 <div><a href="#" class=" ${visibility}" onclick="completeTodo('${ item.id}')"><i class="fa fa-check-circle"></i></a>
-<a href="#" class="edit-todo" onclick = "editTodo('${item.id}')" ><i class="fa fa-edit"></i></a>
+<a href="#" class="edit-todo" onclick = "editTodo(this, '${item.id}')" ><i class="fa fa-edit"></i></a>
 <a href="#" class="delete-todo" onclick="deleteTodo('${item.id}')"><i class="fa fa-times-circle"></i></a>
 </div>
-</div>`
+</div>
+<div class = "edit-item hide">
+  <div id="edit-message"></div>
+  <form action="" onsubmit="return false ">
+    <input type="text" value="${item.name}"  />
+    <button type="submit">Edit Item</button>
+  </form>
+</div>
+`
     )
 })
 itemListElement.innerHTML = todoItem.join('\n');
@@ -117,9 +125,14 @@ const deleteTodo = (id) => {
     todoApp.delete(id);
     displayTodos();
 }
+// console.log(editEl);
+// editEl.addEventListener('click', (e)=>{
+//     e.preventDefault();
+//     console.log(e.target);
+// })
 
-const editTodo = (id) = {
-
+function editTodo (id){
+el.classList.remove('hide');
 }
 
 const clearItems = ()=>{
