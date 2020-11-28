@@ -139,6 +139,10 @@ const completeTodo = (id) =>{
 
 const editTodoHandler = (el, id)=>{
 const todoName = el.previousElementSibling.value;
+if(todoName.length <1){
+   document.getElementById('edit-message').innerText = "Input cannot be empty, please type in something"
+return;
+}
 todoApp.edit(id,todoName);
 }
 
