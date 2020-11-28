@@ -51,6 +51,7 @@ button:hover{
 .todo-item{
 margin-left: 0.3rem;
 margin-right: 0.3rem;
+margin-bottom: 0.3rem;
 display: flex;
 justify-content: space-between;
 
