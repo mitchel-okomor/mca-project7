@@ -20,6 +20,7 @@ body{
 h1{
     color: rgb(61, 60, 60);
     margin-bottom: 1rem;
+    font-weight: 600;
 }
 
 input{
@@ -29,15 +30,18 @@ input{
     padding-left: 0.4rem;
     border: 1px solid #90e8bc;
     outline: none;
+    margin-right: 0;
 
 }
 button{
-    padding: 0.4rem;
+    padding: 0.3rem;
+    margin-left: 0;
     border-radius: 3px;
     border: 1px solid #90e8bc;
     color: #86ccac;
     background-color: rgb(245, 247, 248);
     outline: none;
+    height: 2rem;
 }
 
 button:hover{
@@ -103,6 +107,20 @@ opacity: 0.5;
     display: none;
 }
 
+.edit-form{
+    width: 100%;
+}
+
+.edit-form input{
+    width: 80%;
+}
+.edit-form form{
+    width: 100%;
+}
+
+.accordion{
+    margin-bottom: 0.5rem;
+}
 @media screen and (max-width: 860px){
 
     .container{

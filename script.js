@@ -1,5 +1,7 @@
 
 const itemInput = document.getElementById('item');
+const inputForm = document.getElementsByClassName('form')[0];
+const editInput = document.getElementById('edit-input');
 const messageEl = document.getElementById('message');
 const itemListElement = document.getElementById('item-list');
 
@@ -34,6 +36,15 @@ localStorage.setItem("todos",JSON.stringify(todos) );
         displayTodos();
     },
 
+    edit: function (id, name) {
+            const todos = loadTodos();
+            const todo = todos.find(item => item.id === id);
+            todo.name = name;
+            console.log(todo);
+            localStorage.setItem("todos", JSON.stringify(todos) );   
+            displayTodos();     
+    },
+
     delete: function (id) {
         console.log("delete: "+id)
         const todos = loadTodos();
@@ -41,6 +52,8 @@ localStorage.setItem("todos",JSON.stringify(todos) );
         todos.splice(index,1);
 localStorage.setItem("todos",JSON.stringify(todos) );        
     } 
+
+    
 
 }
 
@@ -62,12 +75,7 @@ if(!todos  || todos.length <1){
 
 
 const saveTodo = (id) => {
-if(id){
-const todos = loadTodos();
-const todo = todos.find(item => item.id === id);
-itemInput.value = todo.name; 
-deleteTodo(id);
-} else{
+
     const todo = {
         id:randomID(),
      name : itemInput.value,
@@ -87,13 +95,13 @@ deleteTodo(id);
        const todoItem = `<div class="todo-item">
        <div class="item-name" >${item.name}</div>
        <div><a href="#" class="complete-todo" onclick="completeTodo('${ item.id}')"><i class="fa fa-check-circle"></i></a>
-       <a href="#" class="edit-todo" onclick = "saveTodo('${item.id}')" ><i class="fa fa-edit"></i></a>
+       <a href="#" class="edit-todo" onclick = "editTodo(this,'${item.id}')" ><i class="fa fa-edit"></i></a>
        <a href="#" class="delete-todo" onclick="deleteTodo('${item.id}')"><i class="fa fa-times-circle"></i></a>
        </div>
        </div>` ;
-       itemListElement.innerHTML= itemListElement.innerHTML + todoItem;
+       itemListElement.innerHTML +=  todoItem;
        itemInput.value ="";
-}
+
 
 }
 
@@ -107,19 +115,22 @@ if(item.isDone){
     strikeText = "strike"
 }
     return(
-        `<div class="todo-item">
+        `<div class="accordion">
+        <div class="todo-item">
 <div class="item-name ${strikeText} ${visibility}" >${item.name}</div>
 <div><a href="#" class=" ${visibility}" onclick="completeTodo('${ item.id}')"><i class="fa fa-check-circle"></i></a>
-<a href="#" class="edit-todo" onclick = "saveTodo('${item.id}')" ><i class="fa fa-edit"></i></a>
+<a href="#" id="edit-btn" class="edit-todo" onclick = "editTodo(this,'${item.id}')" ><i class="fa fa-edit"></i></a>
 <a href="#" class="delete-todo" onclick="deleteTodo('${item.id}')"><i class="fa fa-times-circle"></i></a>
 </div>
 </div>
-<div class = "edit-item hide">
-  <div id="edit-message"></div>
-  <form action="" onsubmit="return false ">
-    <input type="text" value="${item.name}"  />
-    <button type="submit">Edit Item</button>
-  </form>
+
+<div id="edit-form" class="edit-form hide">
+<div id="edit-message"></div>
+<form action="" onsubmit="return false ">
+  <input type="text" id="edit-input" placeholder="Edit Item ..." value="${item.name}" />
+  <button type="submit" onclick="editTodoHandler(this,'${item.id}');">Submit</button>
+</form>
+</div>
 </div>
 `
     )
@@ -131,6 +142,23 @@ itemListElement.innerHTML = todoItem.join('\n');
 const completeTodo = (id) =>{
   
   todoApp.tick(id);  
+}
+
+const editTodoHandler = (el, id)=>{
+const todoName = el.previousElementSibling.value;
+console.log(todoName);
+todoApp.edit(id,todoName);
+}
+
+const editTodo = (el)=>{
+const panel = el.parentElement.parentElement.nextElementSibling;
+console.log(panel);
+if (panel.style.display === "block") {
+  panel.style.display = "none";
+} else {
+  panel.style.display = "block";
+}
+
 }
 
 const deleteTodo = (id) => {
