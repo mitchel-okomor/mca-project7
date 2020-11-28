@@ -138,12 +138,6 @@ const deleteTodo = (id) => {
     todoApp.delete(id);
     displayTodos();
 }
-// console.log(editEl);
-// editEl.addEventListener('click', (e)=>{
-//     e.preventDefault();
-//     console.log(e.target);
-// })
-
 
 const clearItems = ()=>{
     localStorage.removeItem("todos");
