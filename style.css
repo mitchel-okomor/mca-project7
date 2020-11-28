@@ -63,7 +63,7 @@ width:  93%;
 }
 
 .complete-todo{
-    color: #86ccac;
+    color: #86ccac !important;
 
 }
 
@@ -77,6 +77,14 @@ width:  93%;
 #message{
     color: red;
     margin-bottom: 0.5rem;
+}
+
+.visibility{
+opacity: 0.5;
+}
+
+.strike{
+    text-decoration: line-through;
 }
 
 @media screen and (max-width: 860px){
