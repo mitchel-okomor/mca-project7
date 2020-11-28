@@ -40,13 +40,11 @@ localStorage.setItem("todos",JSON.stringify(todos) );
             const todos = loadTodos();
             const todo = todos.find(item => item.id === id);
             todo.name = name;
-            console.log(todo);
             localStorage.setItem("todos", JSON.stringify(todos) );   
             displayTodos();     
     },
 
     delete: function (id) {
-        console.log("delete: "+id)
         const todos = loadTodos();
         const index = todos.findIndex(item => item.id === id);
         todos.splice(index,1);
@@ -60,11 +58,10 @@ localStorage.setItem("todos",JSON.stringify(todos) );
 
 
 
-
+//load todoes from local storage
 const loadTodos = () =>{
-
     const todos = JSON.parse(localStorage.getItem('todos'));
-       //check if there are visitors 
+       //check if there are todoes 
 if(!todos  || todos.length <1){
     return [];
     }
@@ -75,14 +72,11 @@ if(!todos  || todos.length <1){
 
 
 const saveTodo = (id) => {
-
     const todo = {
         id:randomID(),
      name : itemInput.value,
         isDone: false
     }
-    
-    
     if(todo.name.length < 1){
        messageEl.innerText = "Input cannot be empty, please type in something"
     setTimeout(()=>{
@@ -101,10 +95,9 @@ const saveTodo = (id) => {
        </div>` ;
        itemListElement.innerHTML +=  todoItem;
        itemInput.value ="";
-
-
 }
 
+//check all todos for completion before displaying
 const displayTodos = () => {
 const todos = loadTodos();
 const todoItem = todos.map((item)=>{
@@ -146,13 +139,11 @@ const completeTodo = (id) =>{
 
 const editTodoHandler = (el, id)=>{
 const todoName = el.previousElementSibling.value;
-console.log(todoName);
 todoApp.edit(id,todoName);
 }
 
 const editTodo = (el)=>{
 const panel = el.parentElement.parentElement.nextElementSibling;
-console.log(panel);
 if (panel.style.display === "block") {
   panel.style.display = "none";
 } else {
@@ -162,7 +153,6 @@ if (panel.style.display === "block") {
 }
 
 const deleteTodo = (id) => {
-    console.log(id);
     todoApp.delete(id);
     displayTodos();
 }
