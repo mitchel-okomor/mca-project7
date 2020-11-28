@@ -28,6 +28,7 @@ input{
     border-radius: 3px;
     padding-left: 0.4rem;
     border: 1px solid #90e8bc;
+    outline: none;
 
 }
 button{
@@ -80,10 +81,13 @@ width:  93%;
 
 .delete-todo{
     color: red;
+    opacity: 0.7;
+
 }
 #message{
     color: red;
     margin-bottom: 0.5rem;
+    opacity: 0.7;
 }
 
 .visibility{

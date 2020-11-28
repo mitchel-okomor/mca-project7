@@ -1,3 +1,4 @@
+
 const itemInput = document.getElementById('item');
 const messageEl = document.getElementById('message');
 const itemListElement = document.getElementById('item-list');
@@ -60,28 +61,40 @@ if(!todos  || todos.length <1){
 }
 
 
-const saveTodo = () => {
-const todo = {
-    id:randomID(),
- name : itemInput.value,
-    isDone: false
+const saveTodo = (id) => {
+if(id){
+const todos = loadTodos();
+const todo = todos.find(item => item.id === id);
+itemInput.value = todo.name; 
+deleteTodo(id);
+} else{
+    const todo = {
+        id:randomID(),
+     name : itemInput.value,
+        isDone: false
+    }
+    
+    
+    if(todo.name.length < 1){
+       messageEl.innerText = "Input cannot be empty, please type in something"
+    setTimeout(()=>{
+        messageEl.innerText = ""
+    }, 1500)
+       return; 
+    }
+    
+       const item = todoApp.create(todo);
+       const todoItem = `<div class="todo-item">
+       <div class="item-name" >${item.name}</div>
+       <div><a href="#" class="complete-todo" onclick="completeTodo('${ item.id}')"><i class="fa fa-check-circle"></i></a>
+       <a href="#" class="edit-todo" onclick = "saveTodo('${item.id}')" ><i class="fa fa-edit"></i></a>
+       <a href="#" class="delete-todo" onclick="deleteTodo('${item.id}')"><i class="fa fa-times-circle"></i></a>
+       </div>
+       </div>` ;
+       itemListElement.innerHTML= itemListElement.innerHTML + todoItem;
+       itemInput.value ="";
 }
-if(todo.name.length < 1){
-   messageEl.innerText = "Input cannot be empty, please type in something"
 
-   return; 
-}
-
-   const item = todoApp.create(todo);
-   const todoItem = `<div class="todo-item">
-   <div class="item-name" >${item.name}</div>
-   <div><a href="#" class="complete-todo" onclick="completeTodo('${ item.id}')"><i class="fa fa-check-circle"></i></a>
-   <a href="#" class="edit-todo" onclick = "editTodo('${item.id}')" ><i class="fa fa-edit"></i></a>
-   <a href="#" class="delete-todo" onclick="deleteTodo('${item.id}')"><i class="fa fa-times-circle"></i></a>
-   </div>
-   </div>` ;
-   itemListElement.innerHTML= itemListElement.innerHTML + todoItem;
-   itemInput.value ="";
 }
 
 const displayTodos = () => {
@@ -97,7 +110,7 @@ if(item.isDone){
         `<div class="todo-item">
 <div class="item-name ${strikeText} ${visibility}" >${item.name}</div>
 <div><a href="#" class=" ${visibility}" onclick="completeTodo('${ item.id}')"><i class="fa fa-check-circle"></i></a>
-<a href="#" class="edit-todo" onclick = "editTodo(this, '${item.id}')" ><i class="fa fa-edit"></i></a>
+<a href="#" class="edit-todo" onclick = "saveTodo('${item.id}')" ><i class="fa fa-edit"></i></a>
 <a href="#" class="delete-todo" onclick="deleteTodo('${item.id}')"><i class="fa fa-times-circle"></i></a>
 </div>
 </div>
@@ -131,9 +144,6 @@ const deleteTodo = (id) => {
 //     console.log(e.target);
 // })
 
-function editTodo (id){
-el.classList.remove('hide');
-}
 
 const clearItems = ()=>{
     localStorage.removeItem("todos");
